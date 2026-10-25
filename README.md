@@ -133,7 +133,8 @@ que el usuario no puede leer, por lo que allí se usa
   el dominio.
 - `reservar` valida con dos funciones del dominio antes de verificar la superposición: la
   regla de una sola función se cumple en su objetivo, pero no en su letra (D15).
-- El inventario no se puede administrar desde la aplicación (fuera de alcance).
+- R10 (orden por inicio y filtro por unidad) no tiene una prueba automática dedicada; se
+  verificó a mano (docs/verificacion.md).
 
 ## 3. Preparación del agente
 

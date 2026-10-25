@@ -174,3 +174,16 @@ Comprobación con procesos nuevos:
 | disponibilidad MIC-01, 10:30–11:30 | No disponible, en conflicto con la reserva 1 | "La unidad no está disponible. Reservas en conflicto:" y la reserva 1 | Sí |
 | reservar MIC-01, Carla Ruiz, 11:00–12:00 | Aceptada: la cancelación liberó el horario y el límite con la 1 es consecutivo | "Reserva creada con ID 3." | Sí |
 | listar | 1 ACTIVA, 2 CANCELADA, 3 ACTIVA | Las tres reservas con esos estados | Sí |
+
+
+## Verificación adicional de R10 (2026-10-25)
+R10 no tiene una prueba automática dedicada: no tiene criterio CA asociado y solo se usa dentro
+de test_r7_ca6. El autor lo detectó en la revisión final contra la rúbrica (la auditoría 3b no
+lo marcó porque contrastó los criterios CA) y lo verificó a mano con una base de prueba fuera
+del repo.
+
+| Comando | Esperado | Observado | ¿Coincide? |
+| --- | --- | --- | --- |
+| reservar OSC-01, 2099-11-04 09:00–10:00 y después MIC-01, 2099-11-03 10:00–11:00 | ID 1 y luego ID 2 | "Reserva creada con ID 1." y "Reserva creada con ID 2." | Sí |
+| listar | Ordenadas por inicio: primero MIC-01 (3/11) y después OSC-01 (4/11) | ID 2 MIC-01 y luego ID 1 OSC-01 | Sí |
+| listar --unidad MIC-01 | Solo la reserva de MIC-01 | Solo la ID 2 | Sí |

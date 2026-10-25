@@ -234,3 +234,10 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Persistencia tras reiniciar comprobada con la consola: se conservaron las reservas activas
   y canceladas, y la cancelada liberó el horario. Detalle en docs/verificacion.md.
 - Próximo: README en cuatro secciones y revisión contra la rúbrica.
+
+
+## 2026-10-25 — Revisión final contra la rúbrica (autor)
+- Datos pendientes de la documentación completados.
+- Sin secretos en el historial (los resultados de la búsqueda eran "--ask-for-approval").
+- R10 sin prueba automática dedicada: verificado a mano y declarado en el README.
+- Repositorio público, accesible sin iniciar sesión.
