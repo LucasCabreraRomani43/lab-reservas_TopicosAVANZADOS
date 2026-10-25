@@ -143,3 +143,14 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Pendientes y dudas:
   - El repositorio SQLite recibe su ruta y queda listo para que la consola lo conecte en el episodio 3.
   - Pytest informó una advertencia de caché `.pytest_cache` (WinError 183); las 12 pruebas pasaron.
+
+
+## 2026-10-25 — Revisión y cierre del episodio 2 (autor)
+- Agente: Codex CLI 0.164.0 (GPT-6-Luna), sesión 01a17519-bdb1-7d83-8e31-10ab930130e0;
+  trabajó 49 s; límite mensual 100 % → 99 %; no pidió aprobaciones.
+- Revisión: solo tocó archivos permitidos; respetó la regla de D14 en este archivo;
+  BEGIN IMMEDIATE con la función de dominio reutilizada; DELETE solo en el reinicio.
+- Pruebas del autor: 7 passed y 5 errores por permisos de la carpeta temporal de pytest
+  creada por el sandbox de Codex; con --basetemp=../pytest-tmp-lab, 12 passed.
+- Prueba de mutación en dominio.py:129: detectada por test_r7_ca6.
+- Decisión: episodio 2 aceptado sin correcciones de código (commit e3919cd).
