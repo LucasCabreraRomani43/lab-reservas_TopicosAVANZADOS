@@ -226,3 +226,11 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   (SQLite no reutiliza ID); regla 3 confirmada en la forma, sin impacto (D15).
 - 3c (Codex, sesión 01a1754c-…): S2 y S8 corregidos (commit 5b9cf8d); 19 passed del autor.
 - Decisión: episodio 3 aceptado.
+
+
+## 2026-10-25 — Verificación final (autor)
+- Clon limpio del commit b66d5b8: instalación con requirements-dev.txt y 19 passed
+  (Python 3.15.0, pytest 9.1.1), sin usar ninguna cuenta de modelo.
+- Persistencia tras reiniciar comprobada con la consola: se conservaron las reservas activas
+  y canceladas, y la cancelada liberó el horario. Detalle en docs/verificacion.md.
+- Próximo: README en cuatro secciones y revisión contra la rúbrica.

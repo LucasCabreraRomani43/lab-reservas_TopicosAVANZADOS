@@ -136,3 +136,41 @@ Después de la auditoría, git status: working tree clean (no modificó archivos
 | 3b: los 10 criterios con cobertura | Las pruebas citadas existen y pasan (pytest -v) | Sí |
 | 3b: tres desvíos | Dos confirmados (S2; S8 solo en memoria) y uno sin impacto (regla 3) | Parcial |
 | 3c: correcciones aplicadas | 19 passed y la fecha con espacios rechazada | Sí |
+
+
+## Verificación final (2026-10-25)
+
+### Reproducción desde un clon limpio
+| Paso | Comando | Resultado |
+| --- | --- | --- |
+| Clonar | git clone https://github.com/LucasCabreraRomani43/lab-reservas_TopicosAVANZADOS.git verif-lab | Commit b66d5b8 |
+| Entorno | python -m venv .venv y python -m pip install -r requirements-dev.txt | colorama 0.4.6, iniconfig 2.3.1, packaging 26.3, pluggy 1.7.0, Pygments 2.21.0 y pytest 9.1.1 |
+| Versiones | python --version y python -m pytest --version | Python 3.15.0; pytest 9.1.1 |
+| Pruebas | python -m pytest -v --basetemp=../pytest-tmp-verif | 19 passed |
+
+No hace falta ninguna cuenta de modelo. Se usó --basetemp por los permisos que dejó el
+sandbox de Codex en la carpeta temporal de pytest de este equipo (episodio 2); en un equipo
+sin ese antecedente alcanza con python -m pytest -v.
+
+### Persistencia tras detener y reiniciar (procedimiento manual)
+Base de prueba: RESERVAS_DB=data/verificacion.db (ignorada por Git). Cada comando ejecuta la
+aplicación como un proceso independiente que termina al finalizar; la comprobación se hizo
+con procesos nuevos sobre la misma base.
+
+Carga de datos:
+
+| Comando | Observado |
+| --- | --- |
+| reiniciar-datos --confirmar | "Se borraron todas las reservas." |
+| reservar MIC-01, Ana Pérez, 2099-11-03 10:00–11:00 | "Reserva creada con ID 1." |
+| reservar MIC-01, Bruno Díaz, 2099-11-03 11:00–12:00 | "Reserva creada con ID 2." (consecutiva a la 1) |
+| cancelar --id 2 | "Reserva 2 cancelada." |
+
+Comprobación con procesos nuevos:
+
+| Comando | Esperado | Observado | ¿Coincide? |
+| --- | --- | --- | --- |
+| listar | ID 1 ACTIVA e ID 2 CANCELADA, con sus datos | ID 1 Ana Pérez ACTIVA; ID 2 Bruno Díaz CANCELADA; inicio y fin conservados | Sí |
+| disponibilidad MIC-01, 10:30–11:30 | No disponible, en conflicto con la reserva 1 | "La unidad no está disponible. Reservas en conflicto:" y la reserva 1 | Sí |
+| reservar MIC-01, Carla Ruiz, 11:00–12:00 | Aceptada: la cancelación liberó el horario y el límite con la 1 es consecutivo | "Reserva creada con ID 3." | Sí |
+| listar | 1 ACTIVA, 2 CANCELADA, 3 ACTIVA | Las tres reservas con esos estados | Sí |
