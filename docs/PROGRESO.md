@@ -28,3 +28,11 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   decidí mantener los supuestos S4, S5 y S9 como están (ver D6).
 - Pendiente: decidir si los episodios se hacen con Pi normal o con Gentle Shell (D10).
 - Próximo: Episodio 1 (LAB-5), dominio y validaciones con pruebas.
+
+## 2026-10-25 — Prueba de permisos de Gentle Shell y elección del modelo (autor)
+- Con gemini-3.8-flash y gemini-3.7-flash, Gentle Shell devolvió error 503 UNAVAILABLE
+  ("model is currently experiencing high demand"), 3 reintentos automáticos cada vez, en
+  dos intentos separados por 10 minutos.
+- Con gemini-3.6-flash funcionó: creó hola.txt en una carpeta descartable sin pedir
+  aprobación, en modo NORMAL ("Risk: none").
+- Decisiones: los episodios se hacen con Pi normal (D10) y con gemini-3.6-flash (D11).

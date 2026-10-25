@@ -78,4 +78,15 @@ al final con fecha y commit.
   GENTLE_AI_GO_TOOLCHAIN_UNAVAILABLE); solo funciona desde PowerShell (en la terminal de
   VS Code y en Git Bash se cierra al iniciar); agrega 10 agentes, 12 skills y 56
   herramientas, lo que aumenta el consumo de cuota.
-- Uso en los episodios: <completar cuando se decida: Pi normal o Gentle Shell, y por qué>.
+- Uso en los episodios: no se usa. En la prueba del 2026-10-25, en modo NORMAL, Gentle Shell
+  creó un archivo sin pedir aprobación (evaluó "Risk: none"), por lo que no aporta
+  aprobaciones humanas en escrituras comunes y suma contexto y consumo de cuota. Los episodios
+  se hacen con Pi normal.
+
+## D11 — Cambio de modelo a gemini-3.6-flash (2026-10-25)
+- Contexto: gemini-3.8-flash y gemini-3.7-flash devolvieron error 503 UNAVAILABLE ("model is
+  currently experiencing high demand") en varios intentos separados por 10 minutos.
+- Decisión: usar gemini-3.6-flash, que respondió bien en la misma prueba.
+- Alternativas: esperar a que se normalice 3.8; conectar GitHub Copilot.
+- Consecuencias: reemplaza el modelo elegido en D8. Si en algún episodio se usa otro modelo,
+  se registra en docs/episodios.md.
