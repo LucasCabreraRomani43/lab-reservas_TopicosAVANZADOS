@@ -102,3 +102,32 @@ al final con fecha y commit.
   precarga de USD 5.
 - Consecuencias: la capacidad diaria efectiva ronda los 40 pedidos; cada episodio puede
   usar más de un modelo, y eso queda en docs/episodios.md.
+
+  
+## D13 — Agente para los episodios 2 y 3: Codex CLI con ChatGPT Free (2026-10-25)
+- Contexto: en el episodio 1 el plan gratuito de Gemini cortó el trabajo por el límite diario
+  (D12). Alternativas probadas el mismo día en carpetas descartables: DeepSeek (402
+  "Insufficient Balance", sin crédito gratuito), Mistral plan Experiment (429 "Rate limit
+  exceeded" desde el primer pedido) y gemini-3.1-pro (sin cupo gratuito, límite 0).
+- Alternativas consideradas: la suscripción de Claude del autor dentro de Pi (descartada: los
+  términos de Anthropic limitan esa suscripción a Claude Code y Claude.ai); Claude Code;
+  Ollama con un modelo local (depende del hardware, no se probó); esperar la renovación
+  diaria de Gemini.
+- Decisión: usar Codex CLI 0.164.0, el agente de OpenAI que la consigna lista como
+  alternativa, con la cuenta ChatGPT Free del autor.
+- Motivo: funcionó en la prueba; lee AGENTS.md de forma nativa (confirmado con /status y con
+  una pregunta sin herramientas); trabaja con aprobación (Permissions: Workspace, Ask for
+  approval); el límite es mensual y no diario.
+- Consecuencias: el episodio 1 se hizo con Pi + Gemini y los episodios 2 y 3 con Codex, con el
+  mismo AGENTS.md. Engram no está conectado a Codex. La auditoría del episodio 3b usa el modo
+  de solo lectura de Codex en lugar de --tools de Pi.
+
+## D14 — Ajustes de AGENTS.md a partir del episodio 1 (2026-10-25)
+- Contexto: en el episodio 1 el agente borró una entrada del autor en PROGRESO.md y la cuota
+  se agotó antes de terminar.
+- Decisión: agregar a AGENTS.md que las entradas de PROGRESO.md se agregan al final sin borrar
+  ni modificar las existentes, una sección de uso eficiente del modelo y el comando de pruebas
+  para PowerShell.
+- Alternativa: repetir esas indicaciones a mano en cada prompt.
+- Consecuencias: el episodio 2 permite comprobar si el agente respeta la regla nueva, como
+  evidencia de que la adaptación funciona.

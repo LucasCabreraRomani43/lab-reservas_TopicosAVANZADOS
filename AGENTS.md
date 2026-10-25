@@ -4,10 +4,12 @@
 App de consola para reservar unidades de equipos de laboratorio.
 La fuente de verdad es docs/especificacion.md. Si algo no está especificado, no lo
 inventes: cerrá la tarea con una sección "Dudas" proponiendo la decisión.
+Estas instrucciones las usan Pi (episodio 1) y Codex (episodios 2 y 3).
 
 ## Entorno
-- Windows con Git Bash. Entorno virtual en .venv: ejecutá Python como .venv/Scripts/python.
-- Pruebas: .venv/Scripts/python -m pytest -q
+- Windows. Entorno virtual en .venv.
+- Pruebas en Git Bash: .venv/Scripts/python -m pytest -q
+- Pruebas en PowerShell: .venv\Scripts\python -m pytest -q
 
 ## Stack
 - Python 3.12+. En ejecución, solo biblioteca estándar (sqlite3, argparse, datetime, json).
@@ -50,8 +52,14 @@ inventes: cerrá la tarea con una sección "Dudas" proponiendo la decisión.
 - Si tenés herramientas de memoria (Engram), podés usarlas, pero el registro oficial del
   progreso es docs/PROGRESO.md.
 
+## Uso eficiente del modelo
+- Escribí cada archivo completo en una sola operación.
+- No vuelvas a leer archivos que ya leíste en la misma tarea.
+- Ejecutá las pruebas una vez al final; repetí solo si fallan.
+
 ## Al terminar cada tarea
-Agregá al final de docs/PROGRESO.md:
+Agregá AL FINAL de docs/PROGRESO.md una entrada nueva. No borres, reordenes ni modifiques
+las entradas existentes, en especial las marcadas "(autor)".
 
 ### AAAA-MM-DD — <tarea> (agente)
 - Archivos creados o modificados

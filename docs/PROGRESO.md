@@ -101,3 +101,18 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Prueba de mutación en dominio.py:131: detectada por test_r4 (ver docs/verificacion.md).
 - Registro en docs/episodios.md y extractos en docs/evidencia/episodio-1.md; nueva decisión D12.
 - Decisión: episodio 1 aceptado con correcciones.
+
+
+## 2026-10-25 — Cambio de agente para los episodios 2 y 3 (autor)
+- Pruebas en carpetas descartables: DeepSeek → 402 "Insufficient Balance"; Mistral
+  (Experiment) → 429 "Rate limit exceeded" en el primer pedido; gemini-3.1-pro → 429 con
+  límite 0 en el plan gratuito. Se consideró Ollama (local) sin llegar a probarlo.
+- Codex CLI 0.164.0 instalado con npm e iniciado con la cuenta de ChatGPT (plan Free); creó
+  un archivo de prueba en una carpeta descartable.
+- En el repo, Codex respondió que cargó
+  C:\Users\<usuario>\Documents\lab-reservas_TopicosAVANZADOS\AGENTS.md, y /status mostró:
+  modelo GPT-6-Luna (reasoning medium), Permissions: Workspace (Ask for approval),
+  Agents.md: AGENTS.md, plan Free con límite mensual al 100 %.
+- El primer /status se escribió como mensaje y Codex empezó a revisar el repo; se interrumpió
+  y git status siguió limpio.
+- Decisiones D13 (cambio de agente) y D14 (ajustes de AGENTS.md).

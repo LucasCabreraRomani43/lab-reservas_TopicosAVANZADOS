@@ -72,3 +72,17 @@ archivos protegidos, pero borró una entrada de PROGRESO.md (corregido; ver docs
 | Gentle AI | Instalado y probado; no usado en los episodios | gentle-pi 4.3.0 | Ver D10 |
 | Linear | Sí | Plan gratuito | Issues LAB-5, LAB-6 y LAB-7, uno por episodio |
 | Go | Sí | 1.27.3 | Requisito para instalar Gentle AI en Windows |
+
+
+## Episodios 2 y 3: Codex (D13)
+| Dato | Valor | Cómo se obtuvo |
+| --- | --- | --- |
+| Agente (harness) | Codex CLI 0.164.0 | codex --version |
+| Cuenta | ChatGPT, plan Free (límite mensual) | /status |
+| Modelo | GPT-6-Luna (reasoning medium) | /status |
+| Permisos | Workspace (Ask for approval): edita dentro del repo y pide aprobación para lo que sale de ese límite | /status |
+| Instrucciones | AGENTS.md, leído de forma nativa; confirmado con /status y con una pregunta sin herramientas | /status y pregunta |
+| Auditoría 3b | Modo de solo lectura de Codex | <se completa en el episodio 3> |
+
+Datos: los pedidos van a OpenAI bajo los términos de ChatGPT; solo se usan datos ficticios.
+Engram no está conectado a Codex.
