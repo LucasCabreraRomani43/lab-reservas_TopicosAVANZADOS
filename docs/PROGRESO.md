@@ -116,3 +116,30 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - El primer /status se escribió como mensaje y Codex empezó a revisar el repo; se interrumpió
   y git status siguió limpio.
 - Decisiones D13 (cambio de agente) y D14 (ajustes de AGENTS.md).
+
+## 2026-10-25 — Episodio 2: Persistencia SQLite y cancelación (agente)
+- Archivos creados o modificados:
+  - `reservas/persistencia.py`
+  - `reservas/servicio.py`
+  - `tests/test_persistencia.py`
+  - `docs/PROGRESO.md`
+- Requisitos cubiertos (R#):
+  - R7: Cancelar conserva los datos, registra `cancelada_en`, rechaza cancelaciones inválidas y libera el intervalo.
+  - R9: SQLite mantiene reservas al abrir instancias nuevas; alta con verificación e inserción en `BEGIN IMMEDIATE`.
+  - R10: El servicio lista todas las reservas o filtra por unidad, ordenando por inicio.
+  - R11: El reinicio solo borra datos con `confirmar=True`.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  .venv\Scripts\python -m pytest -q
+  ............                                                             [100%]
+  =============================== warnings summary ===============================
+  .venv\Lib\site-packages\_pytest\cacheprovider.py:469
+    C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.pytest_cache\v\cache\nodeids: [WinError 183] No se puede crear un archivo que ya existe: 'C:\\Users\\Usuario\\Documents\\lab-reservas_TopicosAVANZADOS\\.pytest_cache\\v\\cache'
+      config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  12 passed, 1 warning in 0.13s
+  ```
+- Pendientes y dudas:
+  - El repositorio SQLite recibe su ruta y queda listo para que la consola lo conecte en el episodio 3.
+  - Pytest informó una advertencia de caché `.pytest_cache` (WinError 183); las 12 pruebas pasaron.
