@@ -48,3 +48,56 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   Se borró una carpeta `$HOME` vacía creada por error al ejecutar un comando de PowerShell en
   otra terminal. Desde ahora Gentle Shell no se abre dentro del proyecto.
 - No se delegó ninguna tarea a Pi antes de la corrección.
+
+## 2026-10-25 — Episodio 1: Dominio y validaciones (agente)
+- Archivos creados o modificados:
+  - `pyproject.toml`
+  - `reservas/__init__.py`
+  - `reservas/inventario.py`
+  - `reservas/dominio.py`
+  - `reservas/servicio.py`
+  - `tests/test_dominio.py`
+  - `docs/PROGRESO.md`
+- Requisitos cubiertos (R#):
+  - R1: Lectura de unidades de `data/inventario.json`, manejo de errores si falta o es inválido.
+  - R2: Creación de reserva con ID nuevo, estado ACTIVA, unidad, solicitante, inicio, fin y creada_en.
+  - R3: Rechazo por superposición parcial, total o idéntica en intervalos semiabiertos [inicio, fin).
+  - R4: Aceptación de reservas consecutivas de la misma unidad (a.fin == b.inicio).
+  - R5: Aceptación de reservas simultáneas de distintas unidades.
+  - R6: Validación de unidad conocida, solicitante no vacío, fechas válidas, inicio < fin, inicio no en el pasado.
+  - R8: Disponibilidad con la misma lógica de validación y superposición que reservar.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  $ .venv/Scripts/python -m pytest -q
+  .......                                                                  [100%]
+  7 passed in 0.11s
+  ```
+- Pendientes y dudas:
+  - Ninguna duda sobre el alcance de este episodio.
+  - Pendientes para los próximos episodios: persistencia SQLite (R9, R11, LAB-6), cancelación (R7) e interfaz de consola por argparse (R10, LAB-7).
+
+
+  
+## 2026-10-25 — Revisión del episodio 1 (autor)
+- Revisión: solo cambiaron reservas/, tests/, pyproject.toml y docs/PROGRESO.md; sin commits
+  ni cambios de rama; sin datetime.now en reservas/; reservar y disponibilidad usan
+  verificar_superposicion_y_disponibilidad (servicio.py, líneas 80 y 113); condición de
+  superposición en dominio.py, línea 131. Pruebas ejecutadas por el autor: 7 passed
+  (Python 3.15.0, pytest 9.1.1).
+- Desvíos encontrados: (1) el agente borró la entrada "Corrección antes del episodio 1" en
+  lugar de agregar al final; restaurada por el autor. (2) pyproject.toml con [build-system],
+  que no se pidió. (3) prueba test_solicitante_con_espacios_al_inicio_y_final_se_limpia sin
+  número de requisito.
+- Se pidió al agente corregir (2) y (3), pero no hubo cupo: 429 diario en gemini-3.8-flash
+  (17:06); con gemini-3.7-flash el pedido se rechazó con la cuota de gemini-3.8-flash y con
+  gemini-3.5-flash, con la de gemini-3.6-flash (17:08–17:09). El autor aplicó (2) y (3) a mano.
+- Límites del día: 429 por minuto (5 pedidos) y diario (20 pedidos) en gemini-3.6-flash entre
+  las 16:25 y las 16:30; una respuesta llegó cortada ("Incomplete JSON segment at the end").
+- Pendiente: prueba de mutación y registro del episodio en docs/episodios.md.
+
+
+
+## 2026-10-25 — Cierre del episodio 1 (autor)
+- Prueba de mutación en dominio.py:131: detectada por test_r4 (ver docs/verificacion.md).
+- Registro en docs/episodios.md y extractos en docs/evidencia/episodio-1.md; nueva decisión D12.
+- Decisión: episodio 1 aceptado con correcciones.
