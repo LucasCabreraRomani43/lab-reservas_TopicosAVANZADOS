@@ -36,3 +36,15 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Con gemini-3.6-flash funcionó: creó hola.txt en una carpeta descartable sin pedir
   aprobación, en modo NORMAL ("Risk: none").
 - Decisiones: los episodios se hacen con Pi normal (D10) y con gemini-3.6-flash (D11).
+
+## 2026-10-25 — Corrección antes del episodio 1 (autor)
+- Al abrir Pi para el episodio 1, el inicio no mostraba AGENTS.md. Con `git ls-files`
+  comprobé que no estaba versionado: se había creado dentro de .atl/ (carpeta de registro de
+  skills que generó Gentle AI al abrir gentle-shell en el repo), cuyo propio .gitignore lo
+  ocultaba. Por eso no está en el commit spec-v1. Además, .gitignore había quedado en
+  docs/.gitignore, donde no aplicaba a data/*.db.
+- Corrección: AGENTS.md movido a la raíz (sin cambios de contenido) y .gitignore movido a la
+  raíz. Se dejó .atl/ (registro de skills de Gentle AI, ignorado por su propio .gitignore).
+  Se borró una carpeta `$HOME` vacía creada por error al ejecutar un comando de PowerShell en
+  otra terminal. Desde ahora Gentle Shell no se abre dentro del proyecto.
+- No se delegó ninguna tarea a Pi antes de la corrección.
