@@ -198,3 +198,20 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
   17 passed, 1 warning in 1.09s
   ```
+
+## 2026-10-25 — Episodio 3c: Correcciones de auditoría (agente)
+- Archivos creados o modificados: `reservas/dominio.py`, `reservas/servicio.py`, `tests/test_dominio.py`, `docs/PROGRESO.md`.
+- Requisitos cubiertos: S2 (rechazo de fechas con espacios externos), S8 (IDs en memoria no reutilizados tras reiniciar datos); pruebas asociadas a R6 y R11.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  .venv\Scripts\python -m pytest -q
+  ...................                                                      [100%]
+  =============================== warnings summary ===============================
+  .venv\Lib\site-packages\_pytest\cacheprovider.py:469
+    C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.pytest_cache\v\cache\nodeids: [WinError 183] No se puede crear un archivo que ya existe: 'C:\\Users\\Usuario\\Documents\\lab-reservas_TopicosAVANZADOS\\.pytest_cache\\v\\cache'
+      config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  19 passed, 1 warning in 1.07s
+  ```
+- Pendientes y dudas: ninguna. Permanece el aviso de caché `.pytest_cache` de pytest (WinError 183).

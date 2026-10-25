@@ -70,7 +70,6 @@ class RepositorioEnMemoria:
 
     def reiniciar_datos(self) -> None:
         self._reservas.clear()
-        self._proximo_id = 1
 
 
 class ServicioReservas:

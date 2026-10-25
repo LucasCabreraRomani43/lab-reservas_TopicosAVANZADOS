@@ -26,7 +26,6 @@ def parsear_fecha(texto: str) -> datetime:
     if not isinstance(texto, str):
         raise ErrorDominio("La fecha debe ser una cadena de texto.")
     
-    texto = texto.strip()
     try:
         dt = datetime.strptime(texto, FORMATO_FECHA)
     except ValueError as e:
