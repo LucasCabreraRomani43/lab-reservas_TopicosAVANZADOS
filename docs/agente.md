@@ -43,7 +43,7 @@ Harness usado: Pi en el episodio 1 (D10) y Codex en los episodios 2 y 3 (D13).
 | Episodio | Agente y herramientas | Controles aplicados |
 | --- | --- | --- |
 | 1 | Pi: read, bash, edit, write (por defecto) | Rama propia, reglas de AGENTS.md, revisión del diff y pruebas corridas por el autor antes de cada commit |
-| 2, 3a | Codex, modo Workspace (Ask for approval) | Rama propia, reglas de AGENTS.md, aprobación de Codex para acciones fuera del espacio de trabajo, revisión del diff y pruebas corridas por el autor |
+| 2, 3a, 3c | Codex, modo Workspace (Ask for approval) | Rama propia, reglas de AGENTS.md, aprobación de Codex para acciones fuera del espacio de trabajo, revisión del diff y pruebas corridas por el autor |
 | 3b | Codex en modo de solo lectura | Sin escritura; el autor verificó cada hallazgo |
 
 Pi no pide aprobación antes de cada herramienta; las reglas de AGENTS.md son instrucciones,
@@ -54,11 +54,12 @@ archivos protegidos, pero borró una entrada de PROGRESO.md (corregido; ver docs
 | Adaptación (AGENTS.md) | Evidencia en el repo |
 | --- | --- |
 | Turnos consecutivos con condición estricta | reservas/dominio.py:131 (`r.inicio < fin and inicio < r.fin`); test_r4_r8_ca3_ca7_acepta_consecutivas; prueba de mutación en docs/verificacion.md |
-| Una sola función de superposición | verificar_superposicion_y_disponibilidad (dominio.py:95), usada en servicio.py:47, :109 y :146 y en persistencia.py:61 |
-| Reloj inyectable en el dominio | Sin datetime.now en reservas/; reloj fijo 2026-11-01 08:00 en tests/test_dominio.py |
+| Una sola función de superposición | verificar_superposicion_y_disponibilidad (dominio.py:95), usada en servicio.py:47, :109 y :146 y en persistencia.py:61; observación de la auditoría sobre la validación previa en D15 |
+| Reloj inyectable en el dominio | Sin datetime.now en dominio.py, servicio.py ni persistencia.py; solo la consola usa el reloj real (cli.py:73); reloj fijo 2026-11-01 08:00 en las pruebas |
 | Procedimiento de persistencia | reservas/persistencia.py:57–65 (BEGIN IMMEDIATE y función de dominio dentro de la transacción); test_r9_ca8_reabrir_instancia_conserva_activas_y_canceladas; mutación del episodio 2 en docs/verificacion.md |
-| Nombres de prueba con el requisito | Salida de pytest -v en docs/verificacion.md (6 de 7 correctos; la séptima la corrigió el autor) |
-| Registro de progreso del agente | Entrada "Episodio 1 … (agente)" en docs/PROGRESO.md |
+| Nombres de prueba con el requisito | Salida de pytest -v en docs/verificacion.md. Episodio 1: 6 de 7 correctos (la séptima la corrigió el autor). Episodio 3a: 0 de 5 correctos (los corrigió el agente a pedido del autor) |
+| Registro de progreso del agente | Entradas "(agente)" de los episodios 1, 2, 3a y 3c en docs/PROGRESO.md |
+| Agregar al final de PROGRESO.md sin borrar (ajuste D14) | Episodio 1: el agente borró una entrada del autor. Después del ajuste, episodios 2 y 3: solo agregados al final (git diff en docs/verificacion.md) |
 
 ## Retención del progreso
 - docs/PROGRESO.md (versionado): lo escriben el agente al cerrar cada tarea y el autor.
@@ -83,7 +84,7 @@ archivos protegidos, pero borró una entrada de PROGRESO.md (corregido; ver docs
 | Modelo | GPT-6-Luna (reasoning medium) | /status |
 | Permisos | Workspace (Ask for approval): edita dentro del repo y pide aprobación para lo que sale de ese límite | /status |
 | Instrucciones | AGENTS.md, leído de forma nativa; confirmado con /status y con una pregunta sin herramientas | /status y pregunta |
-| Auditoría 3b | Modo de solo lectura de Codex | <se completa en el episodio 3> |
+| Auditoría 3b | codex --sandbox read-only --ask-for-approval never; /status mostró "Permissions: Read Only (never)"; git status limpio después de la auditoría (episodio 3b) | /status y git status |
 
 Datos: los pedidos van a OpenAI bajo los términos de ChatGPT; solo se usan datos ficticios.
 Engram no está conectado a Codex.
@@ -95,3 +96,9 @@ Engram no está conectado a Codex.
 - El sandbox de Codex creó la carpeta temporal de pytest con permisos que el usuario no puede
   leer; el autor verifica con --basetemp fuera del repo.
 - Límite mensual: 100 % antes y 99 % después del episodio.
+
+### Uso en el episodio 3
+- 3a y 3c en modo Workspace (Ask for approval); 3b en solo lectura (Read Only, never).
+- En 3a y 3b Codex no pidió aprobaciones; en 3c: <completar>.
+- La regla de D14 se respetó en las tres partes: PROGRESO.md solo recibió agregados al final.
+- Límite mensual: 99 % después de 3a y 98 % después de 3b; después de 3c: <completar>.

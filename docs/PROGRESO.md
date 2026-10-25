@@ -215,3 +215,14 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   19 passed, 1 warning in 1.07s
   ```
 - Pendientes y dudas: ninguna. Permanece el aviso de caché `.pytest_cache` de pytest (WinError 183).
+
+
+## 2026-10-25 — Revisión y cierre del episodio 3 (autor)
+- 3a (Codex, sesión 01a17535-…): consola y pruebas entre procesos. El autor pidió renombrar 5
+  pruebas sin número de requisito y el agente lo corrigió en la misma sesión (commit 3346f5c).
+- 3b (Codex en solo lectura, sesión 01a17545-…): CA1 a CA10 cubiertos y tres hallazgos;
+  git status limpio después.
+- Verificación del autor: S2 confirmado; S8 confirmado solo en el repositorio en memoria
+  (SQLite no reutiliza ID); regla 3 confirmada en la forma, sin impacto (D15).
+- 3c (Codex, sesión 01a1754c-…): S2 y S8 corregidos (commit 5b9cf8d); 19 passed del autor.
+- Decisión: episodio 3 aceptado.

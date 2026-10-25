@@ -34,3 +34,43 @@ revisión y decisión humana → evidencia verificable.
 | Corrección | No hubo correcciones de código. |
 | Decisión | Aceptado. Cumple R7 y R9–R11, el procedimiento de persistencia y la regla de una sola función; la diferencia en las pruebas era del entorno (permisos del sandbox), no del código. |
 | Evidencia | Commit e3919cd; reservas/persistencia.py; tests/test_persistencia.py; docs/verificacion.md; docs/evidencia/episodio-2.md. |
+
+
+## Episodio 3 — Consola, auditoría en solo lectura y correcciones (LAB-7)
+
+### 3a — Interfaz de consola
+
+| Campo | Registro |
+| --- | --- |
+| Objetivo y requisitos | Sección 5 de la especificación (consola) y CA8, CA9 y CA10 en procesos separados. |
+| Contexto suministrado | AGENTS.md (/status: "Agents.md: AGENTS.md"), la especificación y el código de los episodios 1 y 2. |
+| Instrucción | docs/prompts/episodio-3a.md (commit 4f6ff62). Extracto: "un proceso crea dos reservas, otro proceso cancela una, y un tercer proceso nuevo ejecuta listar". |
+| Agente y sesión | Codex CLI 0.164.0, GPT-6-Luna; sesión 01a17535-ab83-7121-ac3d-e421e0679d9f; 55 s; modo Workspace (Ask for approval); no pidió aprobaciones. |
+| Acción y resultado del agente | Creó reservas/__main__.py, reservas/cli.py y tests/test_cli.py; tras la primera ejecución releyó CA8 y ajustó la prueba para que las dos reservas se creen en el mismo proceso; informó 17 passed; agregó su entrada en PROGRESO.md. |
+| Revisión humana | 17 passed propias; datetime.now solo en cli.py:73 (fuera del dominio); prueba manual de la consola con códigos de salida 0, 1 y 2; PROGRESO.md sin borrados. |
+| Corrección | Las 5 pruebas nuevas no empezaban con test_r…, como pide AGENTS.md. El autor se lo pidió al agente en la misma sesión y Codex las renombró; 17 passed. |
+| Decisión | Aceptado con corrección. |
+| Evidencia | Commit 3346f5c; tests/test_cli.py; docs/verificacion.md; docs/evidencia/episodio-3.md. |
+
+### 3b — Auditoría de cobertura en solo lectura
+
+| Campo | Registro |
+| --- | --- |
+| Objetivo | Contrastar la especificación y AGENTS.md con las pruebas y el código, sin modificar archivos. |
+| Instrucción | docs/prompts/episodio-3b.md (commit 8a2fd0d). |
+| Agente y sesión | Codex con --sandbox read-only --ask-for-approval never; /status: "Permissions: Read Only (never)"; sesión 01a17545-7d05-70b2-a5c8-79e609e2d866; 21 s. |
+| Resultado del agente | CA1 a CA10 con cobertura. Tres hallazgos: S2 (acepta fechas con espacios externos), S8 (el repositorio en memoria reutiliza ID tras reiniciar) y regla 3 (validación repartida en dos funciones). |
+| Revisión humana | git status limpio tras la auditoría; S2 confirmado con python -c; S8 confirmado solo en el repositorio en memoria (en la consola con SQLite el ID siguiente fue 2, por AUTOINCREMENT); regla 3 confirmada en la forma y sin impacto. |
+| Decisión | Corregir S2 y S8 (parte 3c); mantener la regla 3 como está (D15). |
+| Evidencia | docs/evidencia/episodio-3.md; docs/verificacion.md. |
+
+### 3c — Correcciones de la auditoría
+
+| Campo | Registro |
+| --- | --- |
+| Instrucción | docs/prompts/episodio-3c.md (commit b5bc6fb). |
+| Agente y sesión | Codex, modo Workspace (Ask for approval); sesión 01a1754c-d883-70a1-95d9-79184adf72f9; aprobaciones: <completar>. |
+| Acción y resultado del agente | Quitó el strip de parsear_fecha; el repositorio en memoria ya no reinicia el contador de ID; agregó test_r6_rechaza_fechas_con_espacios_externos y test_r11_s8_reinicio_memoria_no_reutiliza_id; agregó su entrada en PROGRESO.md. |
+| Revisión humana | 19 passed propias; la fecha con espacios ahora da ErrorDominio; PROGRESO.md con +17 y sin borrados. |
+| Decisión | Aceptado. |
+| Evidencia | Commit 5b9cf8d; tests/test_dominio.py; docs/verificacion.md. |
