@@ -69,7 +69,7 @@ revisión y decisión humana → evidencia verificable.
 | Campo | Registro |
 | --- | --- |
 | Instrucción | docs/prompts/episodio-3c.md (commit b5bc6fb). |
-| Agente y sesión | Codex, modo Workspace (Ask for approval); sesión 01a1754c-d883-70a1-95d9-79184adf72f9; aprobaciones: <completar>. |
+| Agente y sesión | Codex, modo Workspace (Ask for approval); sesión 01a1754c-d883-70a1-95d9-79184adf72f9; aprobaciones: no se registró. |
 | Acción y resultado del agente | Quitó el strip de parsear_fecha; el repositorio en memoria ya no reinicia el contador de ID; agregó test_r6_rechaza_fechas_con_espacios_externos y test_r11_s8_reinicio_memoria_no_reutiliza_id; agregó su entrada en PROGRESO.md. |
 | Revisión humana | 19 passed propias; la fecha con espacios ahora da ErrorDominio; PROGRESO.md con +17 y sin borrados. |
 | Decisión | Aceptado. |

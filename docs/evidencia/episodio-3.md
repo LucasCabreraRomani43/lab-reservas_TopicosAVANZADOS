@@ -8,7 +8,7 @@ repo (~/.codex/sessions).
 | --- | --- | --- | --- |
 | 3a — Consola | 01a17535-ab83-7121-ac3d-e421e0679d9f | Workspace (Ask for approval) | 55 s, más la corrección de nombres |
 | 3b — Auditoría | 01a17545-7d05-70b2-a5c8-79e609e2d866 | Read Only (never) | 21 s |
-| 3c — Correcciones | 01a1754c-d883-70a1-95d9-79184adf72f9 | Workspace (Ask for approval) | <completar> |
+| 3c — Correcciones | 01a1754c-d883-70a1-95d9-79184adf72f9 | Workspace (Ask for approval) | no se registró |
 
 Codex CLI 0.164.0 · GPT-6-Luna (reasoning medium) · plan Free.
 
@@ -35,4 +35,4 @@ Codex CLI 0.164.0 · GPT-6-Luna (reasoning medium) · plan Free.
 - Instrucción: "Leé docs/prompts/episodio-3c.md y seguí esas instrucciones."
 - Resultado: dominio.py, servicio.py y tests/test_dominio.py modificados; dos pruebas nuevas;
   entrada agregada en PROGRESO.md.
-- Aprobaciones: <completar>.
+- Aprobaciones: no se registró.

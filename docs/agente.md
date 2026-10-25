@@ -3,7 +3,7 @@
 ## Entorno y modelo
 | Dato | Valor | Cómo se obtuvo |
 | --- | --- | --- |
-| Sistema | Windows <versión> | winver |
+| Sistema | Windows (versión no registrada) | winver |
 | Git / terminal | Git 2.56.0.windows.2, Git Bash | git --version |
 | Agente (harness) | Pi 1.3.0 | pi --version |
 | Proveedor | Google Gemini, API key de AI Studio en plan gratuito | /login → Sign in with an API key → Google |
@@ -17,7 +17,7 @@ del proyecto. Motivo de la elección: D1 en docs/decisiones.md.
 ## Instrucciones y configuración
 - De proyecto: AGENTS.md (versionado en la raíz). Pi lo carga al iniciar en la carpeta; se
   verificó antes del episodio 1 (docs/evidencia/episodio-1.md).
-- Globales (~/.pi/agent/AGENTS.md): <no se usaron / extracto saneado>.
+- Globales (~/.pi/agent/AGENTS.md): no se registró.
 - Paquetes de Pi a nivel de usuario: gentle-engram 0.5.0, instalado por `engram setup pi`
   (salida de `pi list`).
 - Configuración externa (~/.pi/agent/settings.json), aplicada el 2026-10-25 con un script de
@@ -69,7 +69,7 @@ archivos protegidos, pero borró una entrada de PROGRESO.md (corregido; ver docs
 ## Herramientas opcionales
 | Herramienta | ¿Se usó? | Versión | Para qué |
 | --- | --- | --- | --- |
-| Orca | <sí/no> | | |
+| Orca | No | — | No se usó |
 | Engram | Sí | 3.5.1 | Memoria del agente entre sesiones |
 | Gentle AI | Instalado y probado; no usado en los episodios | gentle-pi 4.3.0 | Ver D10 |
 | Linear | Sí | Plan gratuito | Issues LAB-5, LAB-6 y LAB-7, uno por episodio |
@@ -99,6 +99,6 @@ Engram no está conectado a Codex.
 
 ### Uso en el episodio 3
 - 3a y 3c en modo Workspace (Ask for approval); 3b en solo lectura (Read Only, never).
-- En 3a y 3b Codex no pidió aprobaciones; en 3c: <completar>.
+- En 3a y 3b Codex no pidió aprobaciones; en 3c: no se registró.
 - La regla de D14 se respetó en las tres partes: PROGRESO.md solo recibió agregados al final.
-- Límite mensual: 99 % después de 3a y 98 % después de 3b; después de 3c: <completar>.
+- Límite mensual: 99 % después de 3a y 98 % después de 3b; después de 3c: no se registró.
