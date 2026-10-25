@@ -131,3 +131,15 @@ al final con fecha y commit.
 - Alternativa: repetir esas indicaciones a mano en cada prompt.
 - Consecuencias: el episodio 2 permite comprobar si el agente respeta la regla nueva, como
   evidencia de que la adaptación funciona.
+
+  
+## D15 — Hallazgo de la auditoría sobre la regla 3: sin cambios (2026-10-25)
+- Contexto: la auditoría 3b señaló que reservar valida con validar_intervalo_y_solicitante
+  (dominio.py:58) antes de llamar a verificar_superposicion_y_disponibilidad (dominio.py:95),
+  así que la validación usa dos funciones.
+- Decisión: no reorganizar el código.
+- Motivo: las dos funciones están en el dominio y no hay lógica duplicada; las pruebas de CA7
+  confirman que reservar y disponibilidad dan el mismo resultado, que es el objetivo de la regla.
+- Alternativa: unificar ambas funciones, con riesgo de regresión al final del trabajo.
+- Consecuencias: la regla 3 se cumple en su objetivo pero no en su letra; queda declarado como
+  limitación en el README.

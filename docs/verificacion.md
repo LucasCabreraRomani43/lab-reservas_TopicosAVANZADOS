@@ -3,7 +3,7 @@
 Comprobaciones ejecutadas por el autor, separadas de lo que informó el agente.
 
 ## Entorno
-Windows <versión> · Git Bash · Python 3.15.0 · pytest 9.1.1 · Pi 1.3.0
+Windows 10, versión 22H2· Git Bash · Python 3.15.0 · pytest 9.1.1 · Pi 1.3.0
 
 ## Episodio 1 — Dominio y validaciones
 
@@ -88,3 +88,51 @@ fragmento.
 | "12 passed, 1 warning" | 7 passed y 5 errors sin --basetemp; 12 passed con --basetemp | No, por el entorno |
 | Agregó su entrada al final de PROGRESO.md | Confirmado con git diff | Sí |
 | Verificación e inserción dentro de BEGIN IMMEDIATE | Confirmado (persistencia.py:57–61) | Sí |
+
+
+## Episodio 3 — Consola, auditoría y correcciones
+
+### Pruebas automáticas ejecutadas por el autor
+| Fecha | Código | Comando | Resultado |
+| --- | --- | --- | --- |
+| 2026-10-25 | Parte 3a, antes de la corrección de nombres | python -m pytest -v --basetemp=../pytest-tmp-lab | 17 passed; las 5 pruebas de test_cli.py sin número de requisito |
+| 2026-10-25 | Commit 3346f5c | python -m pytest -v --basetemp=../pytest-tmp-lab | 17 passed |
+| 2026-10-25 | Commit 5b9cf8d | python -m pytest -v --basetemp=../pytest-tmp-lab | 19 passed |
+
+### Prueba manual de la consola (3a)
+Base de prueba fuera del repo (RESERVAS_DB=../prueba-cli.db), borrada al terminar.
+
+| Comando | Esperado | Observado |
+| --- | --- | --- |
+| unidades | Las 5 unidades del inventario | MIC-01, MIC-02, OSC-01, MUL-01 y FUE-01 con su equipo |
+| reservar MIC-01, 2099-11-03 10:00–11:00 | Aceptada, código 0 | "Reserva creada con ID 1.", código 0 |
+| reservar MIC-01, 2099-11-03 10:30–11:30 | Rechazada por superposición, código 1 | "Error: La unidad 'MIC-01' no está disponible en el intervalo indicado…", código 1 |
+| listar | La reserva 1 activa | "ID: 1 \| Unidad: MIC-01 \| Solicitante: Ana Pérez \| … \| Estado: ACTIVA" |
+| comando-que-no-existe | Uso incorrecto, código 2 | Mensaje de uso de argparse, código 2 |
+
+Control adicional: grep -rn "datetime.now" reservas/ → solo reservas/cli.py:73 (capa de
+consola; el dominio sigue recibiendo un reloj inyectable).
+
+### Verificación de la auditoría (3b)
+| Hallazgo del agente | Comprobación del autor | Veredicto |
+| --- | --- | --- |
+| S2: dominio.py:29 acepta fechas con espacios externos | python -c con parsear_fecha(' 2026-11-03 10:00 ') devolvió 2026-11-03 10:00:00-03:00 | Confirmado |
+| S8: servicio.py:71-73 reinicia el contador de ID | El repositorio en memoria vuelve _proximo_id a 1. En la consola con SQLite: reservar → ID 1; reiniciar-datos --confirmar; reservar → ID 2 (AUTOINCREMENT en persistencia.py:24) | Confirmado solo en el repositorio en memoria |
+| Regla 3: validación en dos funciones | servicio.py:125-145 llama a validar_intervalo_y_solicitante (dominio.py:58) y luego a verificar_superposicion_y_disponibilidad (dominio.py:95) | Confirmado en la forma, sin impacto (D15) |
+
+Después de la auditoría, git status: working tree clean (no modificó archivos).
+
+### Verificación de las correcciones (3c)
+| Corrección | Comprobación | Resultado |
+| --- | --- | --- |
+| S2 | El mismo python -c | ErrorDominio: "Formato de fecha u hora inválido o inexistente" |
+| S8 | test_r11_s8_reinicio_memoria_no_reutiliza_id | passed |
+| Regla de D14 | git diff --stat docs/PROGRESO.md | +17, sin borrados |
+
+### Informado por el agente vs. comprobado por el autor
+| El agente informó | El autor obtuvo | ¿Coincide? |
+| --- | --- | --- |
+| 3a: "17 passed" | 17 passed con --basetemp | Sí |
+| 3b: los 10 criterios con cobertura | Las pruebas citadas existen y pasan (pytest -v) | Sí |
+| 3b: tres desvíos | Dos confirmados (S2; S8 solo en memoria) y uno sin impacto (regla 3) | Parcial |
+| 3c: correcciones aplicadas | 19 passed y la fecha con espacios rechazada | Sí |

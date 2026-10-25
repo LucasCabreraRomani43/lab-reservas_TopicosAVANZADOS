@@ -269,3 +269,26 @@ def test_r2_s6_solicitante_se_guarda_sin_espacios(servicio):
         fin_str="2026-11-03 11:00",
     )
     assert reserva.solicitante == "Ana María Pérez"
+
+
+def test_r6_rechaza_fechas_con_espacios_externos(servicio):
+    """R6 / S2: se rechaza una fecha con espacios al inicio o al final."""
+    for fecha in (" 2026-11-03 10:00", "2026-11-03 10:00 "):
+        with pytest.raises(ErrorDominio, match="inválido o inexistente"):
+            servicio.reservar(
+                "MIC-01", "Ana", fecha, "2026-11-03 11:00"
+            )
+    assert servicio.repo.obtener_todas() == []
+
+
+def test_r11_s8_reinicio_memoria_no_reutiliza_id(servicio):
+    """R11 / S8: reiniciar los datos no vuelve a usar IDs de reserva anteriores."""
+    primera = servicio.reservar(
+        "MIC-01", "Ana", "2026-11-03 10:00", "2026-11-03 11:00"
+    )
+    servicio.reiniciar_datos(confirmar=True)
+    segunda = servicio.reservar(
+        "MIC-01", "Ana", "2026-11-03 10:00", "2026-11-03 11:00"
+    )
+    assert primera.id == 1
+    assert segunda.id == 2
