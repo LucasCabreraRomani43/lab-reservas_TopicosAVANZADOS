@@ -90,3 +90,15 @@ al final con fecha y commit.
 - Alternativas: esperar a que se normalice 3.8; conectar GitHub Copilot.
 - Consecuencias: reemplaza el modelo elegido en D8. Si en algún episodio se usa otro modelo,
   se registra en docs/episodios.md.
+
+  
+## D12 — Rotar modelos Flash ante el límite diario (2026-10-25)
+- Contexto: el plan gratuito permite 20 pedidos por día y por modelo; un episodio usó más.
+  Se observó que los pedidos a gemini-3.7-flash se cuentan con la cuota de gemini-3.8-flash
+  y los de gemini-3.5-flash con la de gemini-3.6-flash.
+- Decisión: cuando se agota un modelo, continuar con otro Flash con cupo propio y registrar
+  qué modelo se usó en cada tramo.
+- Alternativas: esperar la renovación diaria (4:00, hora de Argentina); plan pago con
+  precarga de USD 5.
+- Consecuencias: la capacidad diaria efectiva ronda los 40 pedidos; cada episodio puede
+  usar más de un modelo, y eso queda en docs/episodios.md.

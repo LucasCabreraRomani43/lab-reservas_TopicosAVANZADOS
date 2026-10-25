@@ -94,3 +94,10 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Límites del día: 429 por minuto (5 pedidos) y diario (20 pedidos) en gemini-3.6-flash entre
   las 16:25 y las 16:30; una respuesta llegó cortada ("Incomplete JSON segment at the end").
 - Pendiente: prueba de mutación y registro del episodio en docs/episodios.md.
+
+
+
+## 2026-10-25 — Cierre del episodio 1 (autor)
+- Prueba de mutación en dominio.py:131: detectada por test_r4 (ver docs/verificacion.md).
+- Registro en docs/episodios.md y extractos en docs/evidencia/episodio-1.md; nueva decisión D12.
+- Decisión: episodio 1 aceptado con correcciones.
