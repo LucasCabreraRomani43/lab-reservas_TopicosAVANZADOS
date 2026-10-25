@@ -154,3 +154,47 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   creada por el sandbox de Codex; con --basetemp=../pytest-tmp-lab, 12 passed.
 - Prueba de mutación en dominio.py:129: detectada por test_r7_ca6.
 - Decisión: episodio 2 aceptado sin correcciones de código (commit e3919cd).
+
+## 2026-10-25 — Episodio 3a: Interfaz de consola (agente)
+- Archivos creados o modificados:
+  - `reservas/cli.py`
+  - `reservas/__main__.py`
+  - `tests/test_cli.py`
+  - `docs/PROGRESO.md`
+- Requisitos cubiertos (R#):
+  - R1: `unidades` lista el inventario cargado desde `data/inventario.json`.
+  - R7: `cancelar` actualiza la reserva usando el servicio existente.
+  - R8: `disponibilidad` delega validación y conflictos al servicio de dominio.
+  - R9: persistencia SQLite seleccionable con `--db`, `RESERVAS_DB` o la ruta predeterminada.
+  - R10: `listar` muestra reservas activas y canceladas, con filtro opcional por unidad.
+  - R11: `reiniciar-datos` solo borra reservas con `--confirmar`.
+- Criterios cubiertos: CA8, CA9 y CA10; también códigos de salida 1 para entrada inválida y 2 para comando desconocido.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  .venv\Scripts\python -m pytest -q
+  .................                                                        [100%]
+  =============================== warnings summary ===============================
+  .venv\Lib\site-packages\_pytest\cacheprovider.py:469
+    C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.pytest_cache\v\cache\nodeids: [WinError 183] No se puede crear un archivo que ya existe: 'C:\\Users\\Usuario\\Documents\\lab-reservas_TopicosAVANZADOS\\.pytest_cache\\v\\cache'
+      config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  17 passed, 1 warning in 1.09s
+  ```
+- Pendientes y dudas:
+  - Ninguna duda funcional del episodio. Pytest pasó; permanece la advertencia de caché `.pytest_cache` (WinError 183).
+
+## 2026-10-25 — Convención de nombres de pruebas CLI (agente)
+- Archivos modificados: `tests/test_cli.py`, `docs/PROGRESO.md`.
+- Corrección: nombres con `test_r<n>_` y CA correspondiente conservada en el nombre.
+- Pruebas: `.venv\Scripts\python -m pytest -q`
+  ```
+  .................                                                        [100%]
+  =============================== warnings summary ===============================
+  .venv\Lib\site-packages\_pytest\cacheprovider.py:469
+    C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.pytest_cache\v\cache\nodeids: [WinError 183] No se puede crear un archivo que ya existe: 'C:\\Users\\Usuario\\Documents\\lab-reservas_TopicosAVANZADOS\\.pytest_cache\\v\\cache'
+      config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  17 passed, 1 warning in 1.09s
+  ```
