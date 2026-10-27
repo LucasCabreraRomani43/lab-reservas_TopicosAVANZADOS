@@ -4,10 +4,6 @@ Aplicación de consola en Python para consultar disponibilidad, reservar y cance
 de equipos de un laboratorio sin perder el historial. La construyeron agentes de programación
 bajo revisión humana: Pi en el episodio 1 y Codex en los episodios 2 y 3.
 
-<<<<<<< HEAD
-=======
-![Pruebas](https://github.com/LucasCabreraRomani43/lab-reservas_TopicosAVANZADOS/actions/workflows/pruebas.yml/badge.svg)
->>>>>>> c0df6b8 (docs: insignia del estado de las pruebas en el README (posterior a la entrega))
 
 ## 1. Especificación
 
