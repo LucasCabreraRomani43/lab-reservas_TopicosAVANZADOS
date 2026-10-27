@@ -241,3 +241,19 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
 - Sin secretos en el historial (los resultados de la búsqueda eran "--ask-for-approval").
 - R10 sin prueba automática dedicada: verificado a mano y declarado en el README.
 - Repositorio público, accesible sin iniciar sesión.
+## 2026-10-27 — Revisión de cobertura de errores del inventario (agente)
+- Archivos modificados: `docs/PROGRESO.md`.
+- Requisitos cubiertos: R1; `test_r1_ca9_carga_inventario` en `tests/test_dominio.py` ya comprueba archivo faltante y JSON inválido con mensajes claros. No se añadieron pruebas porque ambos casos ya estaban cubiertos.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  .venv\Scripts\python -m pytest -q
+  ...................                                                      [100%]
+  =============================== warnings summary ===============================
+  .venv\Lib\site-packages\_pytest\cacheprovider.py:469
+    C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\Usuario\Documents\lab-reservas_TopicosAVANZADOS\.pytest_cache\v\cache\nodeids: [WinError 183] No se puede crear un archivo que ya existe: 'C:\\Users\\Usuario\\Documents\\lab-reservas_TopicosAVANZADOS\\.pytest_cache\\v\\cache'
+      config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  19 passed, 1 warning in 1.19s
+  ```
+- Pendientes y dudas: ninguna. La advertencia de caché de pytest (WinError 183) no impidió que pasaran las pruebas.
