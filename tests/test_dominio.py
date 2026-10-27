@@ -280,7 +280,7 @@ def test_r6_rechaza_fechas_con_espacios_externos(servicio):
             )
     assert servicio.repo.obtener_todas() == []
 
-
+# funcion necesaria que no reutilzas
 def test_r11_s8_reinicio_memoria_no_reutiliza_id(servicio):
     """R11 / S8: reiniciar los datos no vuelve a usar IDs de reserva anteriores."""
     primera = servicio.reservar(
@@ -288,6 +288,7 @@ def test_r11_s8_reinicio_memoria_no_reutiliza_id(servicio):
     )
     servicio.reiniciar_datos(confirmar=True)
     segunda = servicio.reservar(
+        # dato inicializado
         "MIC-01", "Ana", "2026-11-03 10:00", "2026-11-03 11:00"
     )
     assert primera.id == 1
