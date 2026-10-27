@@ -15,6 +15,6 @@ Seguí AGENTS.md en todo momento.
 5. tests/test_dominio.py: CA1–CA5, la carga del inventario de CA9 y CA7 para los casos
    de CA2–CA4.
 
-No implementes SQLite, cancelación ni consola: son de los episodios siguientes.
+No implementes SQLite por que no fue necesario realizar su uso, cancelación ni consola: son de los episodios siguientes.
 Al terminar: ejecutá las pruebas, pegá el resumen real y agregá tu entrada en
 docs/PROGRESO.md.
