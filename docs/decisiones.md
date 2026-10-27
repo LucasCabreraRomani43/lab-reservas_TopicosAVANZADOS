@@ -143,3 +143,13 @@ al final con fecha y commit.
 - Alternativa: unificar ambas funciones, con riesgo de regresión al final del trabajo.
 - Consecuencias: la regla 3 se cumple en su objetivo pero no en su letra; queda declarado como
   limitación en el README.
+
+  
+## D16 — Código de salida de disponibilidad (posterior a la entrega)
+- Contexto: la sección 5 de la especificación no define qué código devuelve
+  "disponibilidad" cuando la respuesta es "no disponible".
+- Decisión: código 0 tanto si está disponible como si no; código 1 solo para entradas
+  inválidas y 2 para uso incorrecto.
+- Alternativa: devolver 1 cuando no está disponible.
+- Motivo: la consulta se resolvió correctamente; el resultado se informa en el texto.
+- Consecuencias: el comportamiento queda fijado por una prueba de consola.

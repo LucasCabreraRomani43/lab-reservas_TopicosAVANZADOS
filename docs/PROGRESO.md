@@ -257,3 +257,16 @@ agente (Pi, según la sección "Al terminar cada tarea" de AGENTS.md).
   19 passed, 1 warning in 1.19s
   ```
 - Pendientes y dudas: ninguna. La advertencia de caché de pytest (WinError 183) no impidió que pasaran las pruebas.
+
+## 2026-10-27 — Prueba de disponibilidad por consola (agente)
+- Archivos modificados: `tests/test_cli.py`, `docs/PROGRESO.md`.
+- Requisitos cubiertos: R8; disponibilidad con conflicto, liberación en el límite consecutivo y unidad desconocida.
+- Comando de pruebas y resultado copiado tal cual:
+  ```
+  .venv\Scripts\python -m pytest -q
+  ...F................                                                     [100%]
+  =========================== short test summary info ===========================
+  FAILED tests/test_cli.py::test_r8_disponibilidad_por_consola - AssertionError: 
+  1 failed, 19 passed, 2 warnings in 1.32s
+  ```
+- Pendientes y dudas: la nueva prueba detecta que `disponibilidad` devuelve código 1 para una consulta válida con conflicto, mientras D16 especifica código 0. No se modificó la CLI por el alcance indicado; la prueba queda fallando hasta corregir ese comportamiento.

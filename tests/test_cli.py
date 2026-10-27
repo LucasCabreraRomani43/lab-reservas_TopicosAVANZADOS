@@ -68,6 +68,37 @@ def test_r11_ca10_reinicio_sin_confirmar_conserva_datos(tmp_path):
     assert "ID: 1 | Unidad: MIC-01 | Solicitante: Ana" in listado.stdout
 
 
+def test_r8_disponibilidad_por_consola(tmp_path):
+    db = tmp_path / "reservas.db"
+    crear = ejecutar(
+        db, "reservar", "--unidad", "MIC-01", "--solicitante", "Ana",
+        "--inicio", "2099-11-03 10:00", "--fin", "2099-11-03 11:00",
+    )
+    assert crear.returncode == 0, crear.stderr
+
+    superpuesta = ejecutar(
+        db, "disponibilidad", "--unidad", "MIC-01",
+        "--inicio", "2099-11-03 10:30", "--fin", "2099-11-03 11:30",
+    )
+    assert superpuesta.returncode == 0, superpuesta.stderr
+    assert "no está disponible" in superpuesta.stdout
+    assert "ID: 1 | Unidad: MIC-01 | Solicitante: Ana" in superpuesta.stdout
+    assert "Inicio: 2099-11-03 10:00 | Fin: 2099-11-03 11:00" in superpuesta.stdout
+
+    consecutiva = ejecutar(
+        db, "disponibilidad", "--unidad", "MIC-01",
+        "--inicio", "2099-11-03 11:00", "--fin", "2099-11-03 12:00",
+    )
+    assert consecutiva.returncode == 0, consecutiva.stderr
+    assert "está disponible" in consecutiva.stdout
+
+    desconocida = ejecutar(
+        db, "disponibilidad", "--unidad", "MIC-99",
+        "--inicio", "2099-11-03 10:30", "--fin", "2099-11-03 11:30",
+    )
+    assert desconocida.returncode == 1
+
+
 def test_r6_entrada_invalida_devuelve_uno_y_comando_desconocido_dos(tmp_path):
     db = tmp_path / "reservas.db"
     invalida = ejecutar(
